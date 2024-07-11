@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     typeExpenseSelect.addEventListener('change',  setExpense);
     expenseList.addEventListener('click', removeExpense);
     form.addEventListener('submit', addExpense);
-
+    testShowTotalExpenses();
 });
 
 function setExpense(e) {
@@ -116,6 +116,17 @@ function removeExpense(e) {
 }
 
 function showTotalExpenses() {
+    const total = expenses.reduce((total, expense) => total + expense.amount, 0.0);
+    // Format the total amount as a currency string
+    let formattedTotal = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    // Optional: You can specify additional options such as minimumFractionDigits
+    }).format(total);
+    totalExpenses.textContent = `${formattedTotal}`;
+}
+
+function testShowTotalExpenses() {
     const total = expenses.reduce((total, expense) => total + expense.amount, 0.0);
     // Format the total amount as a currency string
     let formattedTotal = new Intl.NumberFormat('en-US', {
